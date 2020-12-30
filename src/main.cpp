@@ -16,8 +16,6 @@ void portMode(MCP23017Port port, uint8_t directions, uint8_t pullups = 0xFF, uin
 void writeRegister(MCP23017Register reg, uint8_t value);
 
 AsyncSI7021 sensorHumidity;
-float lux = 0;
-float total = 0;
 AsyncAPDS9306 sensor;
 const APDS9306_ALS_GAIN_t again = APDS9306_ALS_GAIN_1;
 const APDS9306_ALS_MEAS_RES_t atime = APDS9306_ALS_MEAS_RES_16BIT_25MS;
@@ -77,6 +75,8 @@ void loop()
   Serial.println("Starting Luminosity Measurement...");
   startTime = millis();
 
+  float lux = 0;
+  float total = 0;
   for (int i = 0; i < 15; i++)
   {
     AsyncAPDS9306Data data = sensor.syncLuminosityMeasurement();
